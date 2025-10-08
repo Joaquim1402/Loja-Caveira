@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crânio & Cia — Contato</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark">
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <svg viewBox="0 0 64 64" class="logo-svg" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 28c0-8 8-14 16-14s16 6 16 14c0 8-3 12-3 12s-4 6-13 6-13-6-13-6-3-4-3-12z" stroke-width="2.5"/>
+          <path d="M30 38c0 2 2 4 4 4s4-2 4-4" stroke-width="1.8"/>
+          <circle cx="24" cy="28" r="3" stroke-width="1.8"/>
+          <circle cx="40" cy="28" r="3" stroke-width="1.8"/>
+        </g>
+      </svg>
+      <span class="brand">Crânio & Cia</span>
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="produto.html">Produtos</a>
+      <a href="sobre.html">Sobre Nós</a>
+      <a href="vagas.html">Vagas</a>
+      <a href="contato.html" class="active">Contato</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="contact">
+      <h1>Fale Conosco</h1>
+      <p class="lead">Tem uma dúvida, encomenda especial ou quer personalizar uma peça? Envie sua mensagem.</p>
+
+      <form id="contactForm" action="javascript:void(0);" method="post" novalidate>
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" type="text" required maxlength="100" placeholder="Seu nome completo">
+
+        <label for="cpf">CPF</label>
+        <input id="cpf" name="cpf" type="text" inputmode="numeric" pattern="\d{11}" maxlength="11" placeholder="Somente números (11 dígitos)">
+
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" required placeholder="seu@exemplo.com">
+
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="6" required placeholder="Conte-nos sua dúvida ou encomenda"></textarea>
+
+        <div class="form-row">
+          <button type="submit" class="cta">Enviar</button>
+          <button type="reset" class="muted">Limpar</button>
+        </div>
+
+        <p id="formFeedback" class="feedback" aria-live="polite"></p>
+      </form>
+
+      <aside class="contact-info">
+        <h3>Outras formas de contato</h3>
+        <p>Email: <a href="mailto:contato@cranioecia.com">contato@cranioecia.com</a></p>
+        <p>Instagram: <a href="https://instagram.com/cranioecia" target="_blank" rel="noopener">@cranioecia</a></p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Crânio & Cia — Bijuterias de Terror</p>
+  </footer>
+
+  <script>
+    // Validação simples e simulação de envio (sem backend)
+    const form = document.getElementById('contactForm');
+    const feedback = document.getElementById('formFeedback');
+
+    function validarCPF(cpf) {
+      // Validação mínima: 11 dígitos numéricos (para demo)
+      return /^\d{11}$/.test(cpf);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value.trim();
+      const cpf = document.getElementById('cpf').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mensagem = document.getElementById('mensagem').value.trim();
+
+      if (!nome || !email || !mensagem) {
+        feedback.textContent = 'Preencha nome, e-mail e mensagem.';
+        feedback.classList.add('error');
+        return;
+      }
+
+      if (cpf && !validarCPF(cpf)) {
+        feedback.textContent = 'CPF inválido. Use 11 dígitos numéricos.';
+        feedback.classList.add('error');
+        return;
+      }
+
+      // Simula envio bem-sucedido
+      feedback.textContent = 'Mensagem enviada! Responderemos em até 2 dias úteis.';
+      feedback.classList.remove('error');
+      feedback.classList.add('success');
+
+      // Aqui você pode integrar com backend (fetch/POST) para envio real
+      form.reset();
+    });
+  </script>
+</body>
+</html>
